@@ -1,0 +1,30 @@
+.form-material {
+    position: relative;
+    padding-top: 26px;
+}
+
+.form-material>.form-control {
+    padding-left: 0;
+    padding-right: 0;
+    border-color: transparent;
+    border-radius: 0;
+    background-color: transparent;
+    box-shadow: 0 1px 0 #d4dae3;
+    transition: box-shadow .3s ease-out;
+}
+
+.form-material>label {
+    position: absolute;
+    top: 6px;
+    left: 0;
+    margin-bottom: 0;
+}
+
+.hidden-text {
+    display: block;
+    width: 100%;
+    white-space: inherit !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    /* -webkit-line-clamp: 3; */
+}

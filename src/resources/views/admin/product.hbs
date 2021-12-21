@@ -1,0 +1,341 @@
+<!-- Header -->
+<div class="header bg-primary pb-6">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+              <div class="col-lg-6 col-7">
+                <h6 class="h2 text-white d-inline-block mb-0">Product</h6>
+                <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                  <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                      <li class="breadcrumb-item">
+                        <a href="/admin">
+                          <i class="fas fa-home"></i>
+                        </a>
+                      </li>
+                      <li class="breadcrumb-item">
+                        <a href="#">Product</a>
+                      </li>
+                  </ol>
+                </nav>
+              </div>
+              <div class="col-lg-6 col-5 text-right">
+                <div class="row">
+                  <div class="col-lg-8"></div>
+                  <div class="col-lg-4">
+                    <a href="/admin/order/ship-info" class="btn btn-bk btn-primary-bk breadcrumb breadcrumb-item text-center" style="color: #5e72e4;" data-toggle="modal" data-target="#addProduct">
+                      Add new products
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Header -->
+
+<!-- Page content -->
+<div class="container-fluid mt--6">
+  <div class="row">
+    <div class="col">
+      <div class="card bg-default shadow">
+        <div class="card-header bg-transparent border-0">
+          <h3 class="text-white mb-0">Dark table</h3>
+        </div>
+        <!-- Dark table -->
+        <div class="table-responsive">
+              <table class="table align-items-center table-flush">
+                <thead class="thead-light">
+              <tr>
+                <th scope="col" class="sort" data-sort="image" style="width: 25%;">Image/Name</th>
+                <th scope="col" class="sort" data-sort="desc" style="width: 25%;">Description</th>
+                <th scope="col" class="sort" data-sort="price" style="width: 10%;">Price</th>
+                <th scope="col" class="sort" data-sort="size" style="width: 10%;">size</th>
+                <th scope="col" class="sort" data-sort="color" style="width: 10%;">color</th> 
+                <th scope="col" class="sort" data-sort="quantity" style="width: 10%;">quantity</th>
+                <th scope="col" class="sort" style="width: 10%;"></th>
+              </tr>
+            </thead>
+            <tbody class="list">
+            {{#each products}}
+              <tr>
+                <th scope="row">
+                  <div class="media align-items-center">
+                    <a href="#" class="avatar rounded-circle mr-3">
+                      <img alt="Image placeholder" src="{{this.image}}">
+                    </a>
+                    <div class="media-body">
+                      <span class="name mb-0 text-sm">{{this.name}}</span>
+                    </div>
+                  </div>
+                </th> 
+                <td class="budget hidden-text" style="">
+                  {{this.description}}
+                </td>
+                <td class="budget">
+                  {{this.price}}
+                </td>
+                <td class="budget">
+                  {{this.size}}
+                </td>
+                <td class="budget">
+                  {{this.color}}
+                </td>
+                <td class="budget">
+                  {{this.quantity}}
+                </td>
+                <td class="budget text-right">
+                    <a href="#" class="btn btn-sm btn-alt-danger bg-gradient-red" data-toggle="tooltip" title="Delete">
+                      <i class="far fa-trash-alt text-white"></i>
+                    </a>
+                    <a href="/product/{{this._id}}" class="btn btn-sm btn-alt-primary bg-gradient-info" data-toggle="modal" title="Update" data-target="#updateProduct">
+                      <i class="fa fa-edit text-white"></i>
+                    </a>
+                </td>
+              </tr>
+              {{!-- Modal update product --}}
+              <div class="modal" id="updateProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-content">
+                            <form action="/admin/product" method="post" id="formUpdate" enctype="index">
+                                <div class="block block-themed block-transparent mb-0 p-5">
+                                    <div class="block-header border-b d-flex align-items-center justify-content-between"  style="border-bottom: 1px solid #ccc;">
+                                        <h3 class="block-title font-w600">Update products</h3>
+                                        <div class="block-options">
+                                            <button type="button" class="btn-block-option border-0" style="background: none;" data-dismiss="modal" aria-label="Close">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="block-content">
+                                        <div class="row pt-3">
+                                            <div class="col-md-6">
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-material">
+                                                            <input type="text" class="form-control" id="name" name="name" value="{{this.name}}"> 
+                                                            <label for="material-text">Product's name</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-12">
+                                                      <div class="form-material">
+                                                        <input class="form-control" type="file" id="image" name="image" value="{{this.image}}">
+                                                        <label for="material-text">Thumbnail</label>
+                                                      </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-material">
+                                                            <select class="form-control" id="material-select" name="category" value="{{this.category}}">
+                                                <option value="0">Select category</option>
+                                                  <option value="1">Man</option>
+                                                  <option value="2">Women</option>
+                                                  <option value="3">Bags</option>
+                                                  <option value="4">Shoes</option>
+                                                  <option value="4">Watches</option>
+                                            </select>
+                                                            <label for="material-select">Category</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-material">
+                                                            <input type="number" class="form-control" id="price" name="price"  value="{{this.price}}">
+                                                            <label for="material-text">Price</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                              <div class="form-group row">
+                                                    <div class="col-12">
+                                                        <div class="form-material">
+                                                            <textarea class="form-control" id="description" name="description" rows="1">{{this.description}}</textarea>
+                                                            <label for="material-textarea-large">Description</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-material">
+                                                            <input type="text" class="form-control" id="size" name="size" value="{{this.size}}">
+                                                            <label for="material-text">Size</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-material">
+                                                            <input type="text" class="form-control" id="color" name="color" value="{{this.color}}">
+                                                            <label for="material-text">Color</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-material">
+                                                            <input type="number" class="form-control" id="quantity" name="quantity" value="{{this.quantity}}">
+                                                            <label for="material-text">Quantity</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <a href="/admin/product" class="btn btn-alt-secondary bg-gradient-red text-white" data-dismiss="modal">Close</a>
+                                    <button href="submit" class="btn btn-bk btn-success-bk btn-add-user bg-gradient-info text-white" id="btnAddUser">
+                                      Update
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+              </div>
+              {{!-- End Modal update product --}}
+            {{/each}}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{!-- modal thêm mới sản phẩm --}}
+<div class="modal" id="addProduct" tabindex="-1" role="dialog" aria-labelledby="modal-normal" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content"> 
+            <form action="/admin/product" method="post" id="formAdd" enctype="multipart/form-data"  >
+                <div class="block block-themed block-transparent mb-0 p-5">
+                    <div class="block-header border-b d-flex align-items-center justify-content-between"  style="border-bottom: 1px solid #ccc;">
+                        <h3 class="block-title font-w600">Create products</h3>
+                        <div class="block-options">
+                            <button type="button" class="btn-block-option border-0" style="background: none;" data-dismiss="modal" aria-label="Close">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="block-content">
+                        <div class="row pt-3">
+                            <div class="col-md-6">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Please enter your product name">
+                                            <label for="material-text">Product's name</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                {{!-- <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            <input type="text" class="form-control" id="slug_name" name="slug_name" placeholder="Please enter your slug name">
+                                            <label for="material-text">slug</label>
+                                        </div>
+                                    </div>
+                                </div> --}}
+                                <div class="form-group row">
+                                    <div class="col-12">
+                                      <div class="form-material">
+                                        <input class="form-control" type="file" id="image" name="image">
+                                        <label for="material-text">Thumbnail</label>
+                                      </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            <select class="form-control" id="material-select" name="category">
+                                                <option value="0">Select category</option>
+                                                {{!-- {{#each products}} --}}
+                                                  <option value="1">Man</option>
+                                                  <option value="2">Women</option>
+                                                  <option value="3">Bags</option>
+                                                  <option value="4">Shoes</option>
+                                                  <option value="4">Watches</option>
+                                                {{!-- {{/each}} --}}
+                                            </select>
+                                            <label for="material-select">Category</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            <input type="number" class="form-control" id="price" name="price" placeholder="Please enter your new price">
+                                            <label for="material-text">Price</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                    <div class="col-12">
+                                        <div class="form-material">
+                                            <textarea class="form-control" id="description" name="description" rows="1" placeholder="Please add a descriptions"></textarea>
+                                            <label for="material-textarea-large">Description</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            {{!-- <input type="text" class="form-control" id="size" name="size" placeholder="Please enter your size"> --}}
+                                            {{!-- <label for="material-text">Size</label> --}}
+                                            <select class="form-control" id="material-select" name="size">
+                                                <option value="0">Select Size</option>
+                                                {{!-- {{#each products}} --}}
+                                                    <option>Size S</option>
+                                                    <option>Size M</option>
+                                                    <option>Size L</option>
+                                                    <option>Size XL</option>
+                                                    <option>Size XXL</option>
+                                                {{!-- {{/each}} --}}
+                                            </select>
+                                            <label for="material-select">Size</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            {{!-- <input type="text" class="form-control" id="color" name="color" placeholder="Please enter your color"> --}}
+                                            <select class="form-control" id="material-select" name="color">
+                                                <option value="0">Select Color</option>
+                                                {{!-- {{#each products}} --}}
+                                                  <option value="1">Black</option>
+                                                  <option value="2">White</option>
+                                                  <option value="3">Red</option>
+                                                  <option value="4">Blue</option>
+                                                  <option value="4">Yellow</option>
+                                                {{!-- {{/each}} --}}
+                                            </select>
+                                            <label for="material-select">Color</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <div class="form-material">
+                                            <input type="number" class="form-control" id="quantity" name="quantity" placeholder="Please enter your quantily">
+                                            <label for="material-text">Quantity</label>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="/admin/product" class="btn btn-alt-secondary bg-gradient-red text-white" data-dismiss="modal">Close</a>
+                    <button type="submit" class="btn btn-bk btn-success-bk btn-add-user bg-gradient-info text-white" id="btnAddUser">
+                        Create 
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{{!-- End modal thêm mới sản phẩm --}}
